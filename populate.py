@@ -33,6 +33,11 @@ def add_data(n):
         WU=f.url()
         WD=f.date()
         add_access(WN,WU,WD)
+if __name__ =='__main__':
+    n=int(input('enter how many rows u wants to insert'))
+    print('population is started')
+    add_data(n)
+    print('population is ended')        
 
 
-add_data(5)
+

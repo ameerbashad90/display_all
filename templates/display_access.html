@@ -9,11 +9,11 @@
 <body>
     <center>
         <h1>displaying AccessRecords</h1>
-        <table>
-             <tr><th>name</th>
+        <table border="4*">
+            <tr><th>name</th>
             <th>date</th></tr>
 
-            {for i in ac %}
+            {% for i in ac %}
 
             <tr>
                 <td>{{i.name}}</td>
@@ -21,7 +21,6 @@
 
             </tr>
             {% endfor %}
-            
         </table>
     </center>
 </body>
