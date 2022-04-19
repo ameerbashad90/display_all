@@ -1,6 +1,7 @@
 from re import A
 from django.shortcuts import render
 from app.models import *
+from django.db.models import Q
 
 # Create your views here.
 def display_topics(request):
@@ -30,10 +31,23 @@ def display_access(request):
     #access=AccessRecords.objects.filter(date__year='2000')
     #access=AccessRecords.objects.filter(date__month__gt='03')
     access=AccessRecords.objects.filter(date__day__gte='03')
-
-    
-
-
-
     d={'ac':access}
     return render(request,'display_access.html',d)
+
+def update_webpages(request):
+    Webpage.objects.filter(topic_name='footBall').update(name='Ronaldo')
+    t=Topic.objects.get_or_create(topic_name='Rubbi')[0]
+    t.save()
+    Webpage.objects.update_or_create(topic_name='Rubbi',defaults={'topic_name': t,'name':'messi','url':'http://messi.com'})
+    Webpage.objects.update_or_create(name='James',defaults={'url':'https://James.com'})
+    webpages=Webpage.objects.all()
+    d={'ws':webpages}
+    return render(request,'display_webpages.html',d)
+
+
+def delete_webpages(request):
+    Webpage.objects.filter(name='Ronaldo').delete()
+    Webpage.objects.filter(name='James').delete()
+    webpages=Webpage.objects.all()
+    d={'ws':webpages}
+    return render ( request,'display_webpages.html',d)
